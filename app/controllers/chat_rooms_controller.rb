@@ -1,20 +1,19 @@
 class ChatRoomsController < ApplicationController
-  def index
-    @chat_rooms = ChatRoom.all
-  end
+  before_action :authenticate_user!
 
-  def new
-    @chat_room = ChatRoom.new
+  def index
+    @chat_room = ChatRoom.involving(current_user)
+    @chat_rooms_all = ChatRoom.all
   end
 
   def create
-    @chat_room = current_user.chat_rooms.build(chat_room_params)
-    if @chat_room.save
-      flash[:success] = 'Chat room added!'
-      redirect_to chat_rooms_path
+    if ChatRoom.between(params[:sender_id], params[:recepient_id]).present?
+      @chat_room = ChatRoom.between(params[:sender_id], params[:recepient_id]).first
     else
-      render 'new'
+      @chat_room = ChatRoom.create(chat_room_params)
     end
+
+    redirect_to chat_room_path(@char_room)
   end
 
   def show
