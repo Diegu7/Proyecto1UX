@@ -12,10 +12,9 @@
 
 <% @chat_rooms_all.each do |chat| %>
   <% if(chat.sender_id = current_user.id || chat.recepient_id = current_user.id) %>
-    <%= chat.recepient_id %>
-    	<% @users.each do |user| %>
-  			<% if(user.id = chat.recepient_id)%>
-    			<%= user.name %>
+    	<% @users.each do |recepient| %>
+  			<% if(recepient.id = chat.recepient_id)%>
+    			<%= recepient.name %>
     			<% break %>
   			<% end %>
   		<% end %>
