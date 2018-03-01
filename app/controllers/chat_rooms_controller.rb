@@ -16,13 +16,9 @@ class ChatRoomsController < ApplicationController
     redirect_to chat_room_path(@char_room)
   end
 
-  def show
-    @chat_room = ChatRoom.includes(:messages).find_by(id: params[:id])
-  end
-
   private
 
   def chat_room_params
-    params.require(:chat_room).permit(:title)
+    params.permit(:sender_id, :recepient_id)
   end
 end

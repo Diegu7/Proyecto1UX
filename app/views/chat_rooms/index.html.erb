@@ -2,6 +2,11 @@
 
 <p class="lead"><%= link_to 'New chat room', new_chat_room_path, class: 'btn btn-primary' %></p>
 
-<ul>
-  <%= render @chat_rooms %>
-</ul>
+
+    <% @users.each do |user| %>
+      <% if user != current_user %>
+        <%= user.name %>
+        <%= link_to "Send Message", conversations_path(sender_id: current_user.id, recepient_id: user.id), method: 'post' %>
+      <% end %>
+      <br>
+    <% end %>
