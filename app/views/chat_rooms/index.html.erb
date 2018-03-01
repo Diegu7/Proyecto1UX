@@ -11,7 +11,7 @@
 <h2>My Chats</h2>
 
 <% @chat_rooms_all.each do |chat| %>
-  <% if(chat.user_id = current_user.id) %>
+  <% if(chat.sender_id = current_user.id || chat.recepient_id = current_user.id) %>
     <%= chat.recepient_id %>
     <%= link_to "Open Chat", chat_rooms_path(sender_id: current_user.id, recepient_id: chat.recepient_id), method: 'post' %>
   <% end %>
