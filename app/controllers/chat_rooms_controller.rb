@@ -4,6 +4,11 @@ class ChatRoomsController < ApplicationController
   def index
     @chat_room = ChatRoom.involving(current_user)
     @chat_rooms_all = ChatRoom.all
+    @users = User.all
+  end
+
+  def show
+    @chat_room = ChatRoom.includes(:messages).find_by(id: params[:id])
   end
 
   def create
@@ -13,7 +18,7 @@ class ChatRoomsController < ApplicationController
       @chat_room = ChatRoom.create(chat_room_params)
     end
 
-    redirect_to chat_room_path(@char_room)
+    redirect_to chat_room_path(@chat_room)
   end
 
   private

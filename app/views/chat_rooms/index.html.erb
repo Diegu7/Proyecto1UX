@@ -1,12 +1,9 @@
 <h1>Chat rooms</h1>
 
-<p class="lead"><%= link_to 'New chat room', new_chat_room_path, class: 'btn btn-primary' %></p>
-
-
-    <% @users.each do |user| %>
-      <% if user != current_user %>
-        <%= user.name %>
-        <%= link_to "Send Message", conversations_path(sender_id: current_user.id, recepient_id: user.id), method: 'post' %>
-      <% end %>
-      <br>
-    <% end %>
+<% @users.each do |user| %>
+  <% if user != current_user %>
+    <%= user.name %>
+    <%= link_to "Send Message", chat_rooms_path(sender_id: current_user.id, recepient_id: user.id), method: 'post' %>
+  <% end %>
+  <br>
+<% end %>
