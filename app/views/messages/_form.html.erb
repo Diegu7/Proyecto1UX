@@ -1,6 +1,6 @@
 <%= bootstrap_form_for([@chat_room, @chat_room.messages.build]) do |f| %>
 	<div class="row">
-		<div class="col-sm-1">
+		<div class="col-sm-1 col-sm-offset-15">
 			<%= f.submit "Send", class: 'btn btn-primary btn-lg' %>
 		</div>
 		<div class="col-sm-6">
